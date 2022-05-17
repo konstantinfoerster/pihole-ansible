@@ -1,6 +1,6 @@
 ---
 - name: Print pihole version
-  ansible.builtin.debug: msg="Install pihole version {{ pihole_tag }} with user {{ ansible_user }}"
+  ansible.builtin.debug: msg="Install pihole version {{ pihole_tag }}"
 
 - name: Add pihole user
   ansible.builtin.user:

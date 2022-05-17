@@ -8,7 +8,6 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends\
        sudo systemd systemd-sysv \
        python3 python3-pip \
-       openssh-server \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && rm -Rf /usr/share/doc && rm -Rf /usr/share/man

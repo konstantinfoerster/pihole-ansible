@@ -3,14 +3,5 @@
   hosts: all
   gather_facts: false
 
-  tasks:
-    - name: Set ansible facts to use ssh connection for next playbook
-      ansible.builtin.set_fact:
-        ansible_connection: "ssh"
-        ansible_port: 2222
-        ansible_host: 127.0.0.1
-        ansible_user: "{{ deployment_user }}"
-        ansible_ssh_common_args: "-o StrictHostKeyChecking=no"
-
 - name: Ensure pihole installation is working as expected
   ansible.builtin.import_playbook: ../../main.yml

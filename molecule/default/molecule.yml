@@ -12,20 +12,14 @@ platforms:
     command: ""
     privileged: true
     pre_build_image: false
-    exposed_ports:
-      - 22
-    published_ports:
-      - "2222:22"
 
 provisioner:
   name: ansible
   playbooks:
-    prepare: prepare.yml
     converge: converge.yml
   inventory:
     links:
       group_vars: ../../group_vars/
-      host_vars: ../../host_vars/
 
 verifier:
   name: ansible
