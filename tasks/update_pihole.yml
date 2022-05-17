@@ -1,0 +1,15 @@
+---
+- name: Update pihole
+  ansible.builtin.command: pihole -up
+  register: piholeupdate
+  changed_when: piholeupdate.rc != 0
+  tags:
+    - never
+    - upgrade
+
+- name: "Display pihole update result"
+  ansible.builtin.debug: var=piholeupdate.stdout
+  when: piholeupdate.stdout is defined
+  tags:
+    - never
+    - upgrade

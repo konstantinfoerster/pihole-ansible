@@ -1,0 +1,12 @@
+---
+- name: Remove unused packages
+  ansible.builtin.package:
+    name:
+      - nano
+      - wpasupplicant
+      - wireless-tools
+      - pi-bluetooth
+      - ntfs-3g
+    state: absent
+    autoremove: true
+    purge: true

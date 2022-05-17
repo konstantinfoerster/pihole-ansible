@@ -1,0 +1,5 @@
+---
+ansible_ssh_private_key_file: molecule/default/files/id_tester
+deployment_user: tester
+deployment_user_public_key:
+  "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPfKNBA/rgXcGUPNFSN9DBgY1OlH54JDy1yNVE486s6z tester@system.test"

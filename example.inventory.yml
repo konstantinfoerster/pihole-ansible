@@ -1,0 +1,7 @@
+---
+all:
+  hosts:
+    raspberry:
+      ansible_host: 192.168.1.5
+      ansible_ssh_private_key_file: ~/.ssh/id_pihole
+      ansible_user: pi

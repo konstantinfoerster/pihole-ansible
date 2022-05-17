@@ -1,0 +1,11 @@
+---
+- name: Ensure package ntp is installed
+  ansible.builtin.package:
+    name: ntp
+    state: present
+
+- name: Ensure deamon ntp is started and enabled
+  ansible.builtin.service:
+    name: ntp
+    state: started
+    enabled: true

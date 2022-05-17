@@ -1,0 +1,71 @@
+---
+- name: "Prepare deployment user {{ deployment_user }}"
+  hosts: all
+  gather_facts: false
+  become: true
+
+  tasks:
+    - name: Ensure package ssh is installed
+      ansible.builtin.apt:
+        name: ssh
+        state: present
+
+    - name: Ensure SSH daemon is running
+      ansible.builtin.service:
+        name: ssh
+        state: started
+        enabled: true
+
+    - name: "Ensure group {{ deployment_user }} exists"
+      ansible.builtin.group:
+        name: "{{ deployment_user }}"
+        state: present
+
+    - name: "Ensure user {{ deployment_user }} exists"
+      ansible.builtin.user:
+        name: "{{ deployment_user }}"
+        groups:
+          - "{{ deployment_user }}"
+        state: present
+
+    - name: "Ensure user {{ deployment_user }} is added to passwordless sudoers"
+      ansible.builtin.copy:
+        dest: /etc/sudoers.d/001_deplyoment_user
+        content: "{{ deployment_user }} ALL=(ALL) NOPASSWD: ALL"
+        mode: 0644
+        force: false
+        validate: "visudo -cf %s"
+
+    - name: "Ensure dir .ssh for user {{ deployment_user }} exists"
+      ansible.builtin.file:
+        path: "/home/{{ deployment_user }}/.ssh"
+        mode: "0700"
+        owner: "{{ deployment_user }}"
+        group: "{{ deployment_user }}"
+        state: directory
+
+    - name: "Ensure public key for user {{ deployment_user }} exists"
+      ansible.builtin.copy:
+        dest: "/home/{{ deployment_user }}/.ssh/authorized_keys"
+        content: "{{ deployment_user_public_key }}"
+        mode: 0600
+        owner: "{{ deployment_user }}"
+        group: "{{ deployment_user }}"
+
+    - name: Set ansible facts to use ssh connection for next playbook
+      ansible.builtin.set_fact:
+        ansible_user: "{{ deployment_user }}"
+        ansible_connection: "ssh"
+        ansible_port: 2222
+        ansible_host: 127.0.0.1
+        ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+
+    - name: "Verify SSH connection for user {{ ansible_user }} works"
+      block:
+        - name: "Check SSH connection for user {{ ansible_user }}"
+          ansible.builtin.wait_for_connection:
+            timeout: 10
+      rescue:
+        - name: Abort if connection with user is not possible
+          ansible.builtin.fail:
+            msg: "Connection {{ ansible_user }}@{{ ansible_host }} failed"

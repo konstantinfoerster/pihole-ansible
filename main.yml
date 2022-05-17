@@ -1,0 +1,18 @@
+---
+- name: Install pihole
+  hosts: all
+  gather_facts: false
+  become: true
+
+  handlers:
+    - name: Include ssh restart handler
+      ansible.builtin.import_tasks: tasks/restart_ssh.yml
+
+  tasks:
+    - ansible.builtin.import_tasks: tasks/update.yml
+    - ansible.builtin.import_tasks: tasks/enable_ntp.yml
+    - ansible.builtin.import_tasks: tasks/harden_ssh.yml
+    - ansible.builtin.import_tasks: tasks/enable_autoupdate.yml
+    - ansible.builtin.import_tasks: tasks/remove_unused_packages.yml
+    - ansible.builtin.import_tasks: tasks/boostrap_pihole.yml
+    - ansible.builtin.import_tasks: tasks/update_pihole.yml
