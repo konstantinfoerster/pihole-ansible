@@ -5,11 +5,11 @@
   changed_when: piholeupdate.rc != 0
   tags:
     - never
-    - upgrade
+    - update
 
 - name: "Display pihole update result"
   ansible.builtin.debug: var=piholeupdate.stdout
   when: piholeupdate.stdout is defined
   tags:
     - never
-    - upgrade
+    - update

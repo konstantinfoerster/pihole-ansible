@@ -9,7 +9,7 @@
       ansible.builtin.import_tasks: tasks/restart_ssh.yml
 
   tasks:
-    - ansible.builtin.import_tasks: tasks/update.yml
+    - ansible.builtin.import_tasks: tasks/update_system.yml
     - ansible.builtin.import_tasks: tasks/enable_ntp.yml
     - ansible.builtin.import_tasks: tasks/harden_ssh.yml
     - ansible.builtin.import_tasks: tasks/enable_autoupdate.yml
