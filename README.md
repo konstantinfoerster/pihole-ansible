@@ -27,5 +27,5 @@ The Pi-hole installation can be configured inside `templates/setupVars.conf.j2`.
 ## Update Pi-hole version
 
 1. Check https://github.com/pi-hole/pi-hole/releases for the latest version
-2. Change `pihole_tag` inside `group_vars/all.yml`to the new tag
+2. Change `pihole_tag` inside `group_vars/all.yml`to the new version
 3. Run: `ansible-playbook  main.yml --tags update`
