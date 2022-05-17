@@ -29,3 +29,19 @@ The Pi-hole installation can be configured inside `templates/setupVars.conf.j2`.
 1. Check https://github.com/pi-hole/pi-hole/releases for the latest version
 2. Change `pihole_tag` inside `group_vars/all.yml`to the new version
 3. Run: `ansible-playbook  main.yml --tags update`
+
+## Misc
+
+Generate a new ssh key and copy it to the target machine:
+```shell
+TARGET_SYSTEM=192.168.5.253
+TARGET_SYSTEM_USER=pi
+# Generate key
+ssh-keygen -t ed25519 -a 100 -C "${USER}" -f ${HOME}/.ssh/id_pihole
+
+# Copy key
+ssh-copy-id -i ${HOME}/.ssh/id_pihole ${TARGET_SYSTEM_USER}@${TARGET_SYSTEM}
+
+# Login with key
+ssh -i ${HOME}/.ssh/id_pihole ${TARGET_SYSTEM_USER}@${TARGET_SYSTEM}
+```
