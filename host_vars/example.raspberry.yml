@@ -2,4 +2,3 @@
 pihole_password: changeit
 setup_vars:
   PIHOLE_INTERFACE: eth0
-  IPV4_ADDRESS: "{{ ansible_host }}/24"
