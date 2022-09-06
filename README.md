@@ -24,6 +24,10 @@ The Pi-hole installation can be configured inside `templates/setupVars.conf.j2`.
 * DNS Server is per default set to 1.1.1.1 Cloudflare (DNSSEC)
 * The password can be configured within `host_vars/raspberry.yml`
 
+## System update
+
+* Run the playbook: `ansible-playbook main.yml`
+
 ## Update Pi-hole version
 
 1. Check https://github.com/pi-hole/pi-hole/releases for the latest version

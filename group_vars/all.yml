@@ -1,6 +1,5 @@
 ---
-pihole_tag: v5.10
-pihole_password: admin
+pihole_tag: v5.12
+pihole_password: changeit
 setup_vars:
   PIHOLE_INTERFACE: eth0
-  IPV4_ADDRESS: 192.168.1.5/24
