@@ -1,5 +1,5 @@
 ---
 pihole_tag: v5.12
-pihole_password: admin
+pihole_password: changeit
 setup_vars:
   PIHOLE_INTERFACE: eth0
